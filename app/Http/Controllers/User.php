@@ -13,21 +13,24 @@ class User extends Controller
         return view('index',['members'=>$data]);
     }
     public function register1(Request $request){
-        //print_r($request->input());
-        //die();
+        //echo "<pre>";print_r($request->file);
+        //die("Testing chal rahi hai");
         $test = new Data;
         $test->name = $request->name;
         $test->email = $request->email;
         $test->password = $request->password;
+        $fileName = time().'.'.$request->file->extension();  
+        $request->file->move(public_path('file'), $fileName);
+        $test->file = $fileName;
         $test1 = $test->save();
         if($test1){
-            return redirect('index');
+            return back()->with('success', 'Data inserted Successfully');
         }
     }
     public function delete($id){
         $data=Data::find($id);
         $data->delete();
-        return redirect('index');
+        return back()->with('success1', 'Data Deleted Successfully');
     }
     public function update($id){
         $data = Data::find($id);
@@ -42,6 +45,21 @@ function update1(Request $request){
     $data->save();
     return redirect('index');
 
+}
+public function login(){
+    return view('login');
+}
+public function login1(Request $request){
+    $name = $request->name;
+    $password = $request->password;
+    $sql = DB::table('crud')->where(['name'=>$name,'password'=>$password])->get();
+    $data = count($sql);
+    if($data == 0){
+        return back()->with('error', 'Please Enter Valid Crendential');
+    }
+    else{
+        return redirect('index');
+    }
 }
 
 

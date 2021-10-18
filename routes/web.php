@@ -23,3 +23,5 @@ Route::POST('index',[User::class,'register1']);
 Route::get('delete/{id}',[User::class,'delete']);
 Route::get('update/{id}',[User::class,'update']);
 Route::POST('update/{id}',[User::class,'update1']);
+Route::get('login',[User::class,'login']);
+Route::POST('login1',[User::class,'login1']);
