@@ -15,7 +15,7 @@ use App\Http\Controllers\User;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 Route::get('index',[User::class,'register']);
