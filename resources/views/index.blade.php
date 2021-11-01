@@ -29,7 +29,7 @@ padding-top:30px;
         background-color:black;
         text-align:center;
         border: 1px solid yellow;
-        height:210px;
+        height:230px;
         padding-top:10px;
     }
     p{
@@ -59,8 +59,29 @@ padding-top:30px;
     #canva{
         margin:10px;
     }
+    select{
+        color:black;
+        background-color:yellow;
+    }
+    option{
+        background-color:yellow;
+    }
+    img{
+    width: 225px;
+    height: 229px;
+    border: 5px solid yellow;
+    background-color:black;
+    }
+    marquee{
+        color:black;
+        background-color:yellow;
+    }
 </style>
 <body>
+<div class="img">
+    <img src="http://127.0.0.1:8000/file/keshav.jpg" alt="">
+    <marquee scrollamount="10" direction="right">Made by keshav Rana</marquee>
+    </div>
     <div id="h1">
     <canvas id="canvas"></canvas>
     <h1>CRUD operation in Laravel 8</h1>
@@ -69,7 +90,12 @@ padding-top:30px;
         @csrf
         <p>Name: <input type="text" name="name" required placeholder="Enter Your Name"></p>
         <p>Email: <input type="text" name="email" required placeholder="Enter Your Email"></p>
-        <p>Password: <input type="text" name="password" required placeholder="Enter Your Password"></p>
+        <p>Password: <input type="password" name="password" required placeholder="Enter Your Password"></p>
+        <p>Select Your gender <select name="gender" id="">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="transgender">Transgender</option>
+        </select> </p>
         <input id="file" type="file" name="file">
         <button type="submit" name="submit">Submit</button>
     </form>
@@ -91,6 +117,7 @@ padding-top:30px;
         <thead>
             <th>Name</th>
             <th>Email</th>
+            <th>Gender</th>
             <th>File</th>
             <th>Password</th>
             <th colspan="2">Action</th>
@@ -100,6 +127,7 @@ padding-top:30px;
            <tr>
                <td>{{$member['name']}}</td>
                <td>{{$member['email']}}</td>
+               <td>{{$member['gender']}}</td>
                <td>{{$member['file']}}</td>
                <td>{{$member['password']}}</td>
                <td><a href="update/{{$member['id']}}"><i class="fa fa-edit fa-2x" style="color:green" aria-hidden="true"></i></a></td>

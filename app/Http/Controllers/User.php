@@ -13,7 +13,7 @@ class User extends Controller
         return view('index',['members'=>$data]);
     }
     public function register1(Request $request){
-        //echo "<pre>";print_r($request->file);
+        //echo "<pre>";print_r($request->all());
         //die("Testing chal rahi hai");
         $test = new Data;
         $test->name = $request->name;
@@ -22,6 +22,7 @@ class User extends Controller
         $fileName = time().'.'.$request->file->extension();  
         $request->file->move(public_path('file'), $fileName);
         $test->file = $fileName;
+        $test->gender = $request->gender;
         $test1 = $test->save();
         if($test1){
             return back()->with('success', 'Data inserted Successfully');
@@ -62,5 +63,17 @@ public function login1(Request $request){
     }
 }
 
+public function ajax(){
+    return view('ajaxform');
+}
+public function ajaxinsert(Request $request){
+    $data = new Data;
+    $data->name = $request->name;
+    $data->email = $request->email;
+    $data->password = $request->password;
+    $data->save();
+    return ["message"=>"Data is inserted successfully"];
+
+}
 
 }

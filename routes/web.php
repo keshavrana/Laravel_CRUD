@@ -25,3 +25,5 @@ Route::get('update/{id}',[User::class,'update']);
 Route::POST('update/{id}',[User::class,'update1']);
 Route::get('login',[User::class,'login']);
 Route::POST('login1',[User::class,'login1']);
+Route::get('ajax',[User::class,'ajax']);
+Route::post('insert',[User::class,'ajaxinsert'])->name('data.insert');
